@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import Container from "../components/common/Container.vue";
 import { RefreshLeft } from '@element-plus/icons-vue';
+import ResetButton from '../components/common/ResetButton.vue';
 
 interface Hieroglyph {
     h: string,
@@ -9,7 +10,7 @@ interface Hieroglyph {
 }
 
 export default defineComponent({
-    components: { Container, RefreshLeft },
+    components: { Container, RefreshLeft, ResetButton },
     data() {
         return {
             text: "🌙’🏝🥷🐉🏝🐶🐘 🇶🇦🇺🇦🐘 🚂🇺🇦 🐶🦉🐘🦈🐶🦉🐘👩‍🔬 🐘👩‍🔬🚂 🌙🕷 🌙🐘🚂🚂🦈🐘 🧙🏻‍♂️, ⛵️🦈🕷🍷🫒!",
@@ -48,7 +49,7 @@ export default defineComponent({
         },
     },
     methods: {
-        reset() {
+        onReset() {
             this.hieroglyphs = this.hieroglyphs.map((hieroglyph: Hieroglyph) => ({ h: hieroglyph.h, r: "" }));
         }
     }
@@ -70,12 +71,7 @@ export default defineComponent({
             <template #header>
                 <div class="card-header">
                     <span class="card-header-title">Liste</span>
-                    <el-button @click="reset" type="danger" round>            
-                        <span style="margin-right: 6px">Reset</span>
-                        <el-icon>
-                            <RefreshLeft />
-                        </el-icon>
-                    </el-button>
+                    <ResetButton :onReset="onReset" />
                 </div>
             </template>
             <el-table border :data="hieroglyphs" style="width: 100%">
@@ -96,7 +92,6 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
 }
-
 .card-header-title {
     font-weight: bold;
 }

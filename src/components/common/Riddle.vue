@@ -28,11 +28,11 @@ export default defineComponent({
 <style scoped>
 .riddle {
     background-color: var(--el-fill-color);
-    border-radius: 12px;
+    border-radius: 16px;
     margin: 12px;
-    width: 75px;
-    height: 75px;
-    min-width: 75px;
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;

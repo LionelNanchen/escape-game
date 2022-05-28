@@ -38,7 +38,7 @@ export const riddles: Riddle[] = [
     {
         id: RiddleId.Axe,
         index: 5,
-        title: "Axe",
+        title: "Hache",
         response: "",
         background: "",
     },

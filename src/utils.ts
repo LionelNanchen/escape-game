@@ -3,6 +3,7 @@ export enum RiddleId {
     DoubleMemories = "doubleMemories",
     WorldMap = "worldMap",
     Axe = "axe",
+    Souvenir = "souvenir",
 }
 
 export const riddles: Riddle[] = [
@@ -42,9 +43,9 @@ export const riddles: Riddle[] = [
         background: "",
     },
     {
-        id: "",
+        id: RiddleId.Souvenir,
         index: 6,
-        title: "Grid 2",
+        title: "Souvenir",
         response: "",
         background: "",
     },

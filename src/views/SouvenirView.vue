@@ -16,20 +16,20 @@ export default defineComponent({
     data() {
         const data: Data = {
             startingMatrix: [
-                ['⚽️', undefined, undefined, undefined, undefined],
-                [undefined, undefined, undefined, '🏀', undefined],
-                [undefined, undefined, undefined, undefined, '🪩'],
-                [undefined, undefined, '⚾️', undefined, undefined],
-                [undefined, '🎾', undefined, undefined, undefined],
-            ],
-            answerMatrix: [
                 [undefined, '⚾️', undefined, undefined, undefined],
                 [undefined, undefined, undefined, undefined, '🎾'],
                 [undefined, undefined, undefined, '⚽️', undefined],
                 [undefined, undefined, undefined, '🪩', undefined],
                 ['🏀', undefined, undefined, undefined, undefined],
             ],
-            answer: 'U',
+            answerMatrix: [
+                ['⚽️', undefined, undefined, undefined, undefined],
+                [undefined, undefined, undefined, '🏀', undefined],
+                [undefined, undefined, undefined, undefined, '🪩'],
+                [undefined, undefined, '⚾️', undefined, undefined],
+                [undefined, '🎾', undefined, undefined, undefined],
+            ],
+            answer: 'Z',
         };
         return data;
     },

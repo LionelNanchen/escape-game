@@ -3,6 +3,7 @@ import WelcomeView from "../views/WelcomeView.vue"
 import HieroglyphsView from "../views/HieroglyphsView.vue"
 import { riddles } from "@/utils";
 import DoubleMemoriesView from "@/views/DoubleMemoriesView.vue";
+import SouvenirView from "@/views/SouvenirView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: `/${riddles[1].id}`,
       name: riddles[1].title,
       component: DoubleMemoriesView,
+    },
+    {
+      path: `/${riddles[5].id}`,
+      name: riddles[5].title,
+      component: SouvenirView,
     }
   ],
 });

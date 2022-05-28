@@ -5,3 +5,5 @@ interface Riddle {
     response: string,
     background: string,
 }
+
+type Matrix = (string | undefined)[][];

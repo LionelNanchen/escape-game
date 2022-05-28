@@ -19,8 +19,9 @@ export default defineComponent({
 
 <template>
     <div class="riddle" v-bind:class="(currentRiddle?.id === riddle.id) ? 'current-riddle' : ''" @click="onClick">
-        <span v-if="riddle.response.length > 0">{{ riddle.response }}</span>
+        <span v-if="riddle.response.length > 0" style="font-weight: bold">{{ riddle.response }}</span>
         <span v-else>{{ riddle.index }}</span>
+        <span class="riddle-title">{{ riddle.title }}</span>
     </div>
 </template>
 
@@ -33,11 +34,15 @@ export default defineComponent({
     height: 75px;
     min-width: 75px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 }
-
+.riddle-title {
+    font-size: 12px;
+    text-align: center;
+}
 .current-riddle {
     background-color: var(--el-color-primary-light-5);
 }

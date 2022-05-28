@@ -19,6 +19,7 @@ export default defineComponent({
         return data;
     },
     created() {
+        // TODO: Handle Welcome page
         const path = window.location.pathname.split('/')[1];
         const store = useRiddlesStore();
         this.riddles = store.riddles;
@@ -40,7 +41,7 @@ export default defineComponent({
                     </div>
                 </el-scrollbar>
                 <div class="main">
-                    <span class="riddle-index">Enigme {{ currentRiddle?.index }} - </span>
+                    <span class="riddle-index">Énigme {{ currentRiddle?.index }} - </span>
                     <span class="title">{{ currentRiddle?.title }}</span>
                     <div class="input-response">
                         <el-input v-if="currentRiddle" maxlength="1" show-word-limit type="text" placeholder="Réponse"
@@ -65,9 +66,11 @@ export default defineComponent({
 }
 
 .title {
+    font-size: 18px;
     font-weight: bold;
 }
 .input-response {
+    margin-top: 6px;
     max-width: 140px;
 }
 </style>

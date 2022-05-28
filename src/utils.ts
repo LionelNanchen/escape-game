@@ -1,5 +1,6 @@
 export enum RiddleId {
     Hieroglyphs = "hieroglyphs",
+    DoubleMemories = "doubleMemories",
     WorldMap = "worldMap",
     Axe = "axe",
 }
@@ -13,9 +14,9 @@ export const riddles: Riddle[] = [
         background: "",
     },
     {
-        id: "",
+        id: RiddleId.DoubleMemories,
         index: 2,
-        title: "Grid 1",
+        title: "Mémoires double",
         response: "",
         background: "",
     },

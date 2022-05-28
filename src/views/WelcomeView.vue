@@ -4,7 +4,7 @@ import Container from "../components/common/Container.vue";
 </script>
 
 <template>
-  <Container title="Welcome" />
+  <Container />
 </template>
 
 <style scoped>

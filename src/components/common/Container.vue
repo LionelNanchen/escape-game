@@ -1,8 +1,9 @@
 <script lang="ts">
 import { useRiddlesStore } from "@/stores";
-import { defineComponent } from "vue";
+import type { ElScrollbar } from "element-plus";
+import { defineComponent, ref } from "vue";
 import Header from "./Header.vue";
-import Riddle from "./Riddle.vue";
+import RiddleSelect from "./RiddleSelect.vue";
 
 interface Data {
     riddles: Riddle[] | undefined,
@@ -10,7 +11,7 @@ interface Data {
 }
 
 export default defineComponent({
-    components: { Header, Riddle },
+    components: { Header, RiddleSelect },
     data() {
         const data: Data = {
             riddles: [],
@@ -25,6 +26,15 @@ export default defineComponent({
         this.riddles = store.riddles;
         this.currentRiddle = this.riddles?.find((r: Riddle) => r.id === path);
     },
+    mounted() {
+        // Scroll to riddle select
+        const width = (this.$refs.innerRef as HTMLDivElement).clientWidth;
+        const index = this.currentRiddle?.index ?? 1;
+        if (index > 4) {
+            const offset = width * (this.currentRiddle?.index ?? 1) / 7;
+            (this.$refs.scrollbarRef as InstanceType<typeof ElScrollbar>).setScrollLeft(offset);
+        }
+    },
 })
 </script>
 
@@ -35,9 +45,9 @@ export default defineComponent({
                 <Header />
             </el-header>
             <el-main>
-                <el-scrollbar>
-                    <div class="riddles">
-                        <Riddle v-for="riddle in riddles" :riddle="riddle" :currentRiddle="currentRiddle" />
+                <el-scrollbar ref="scrollbarRef">
+                    <div ref="innerRef" class="riddles">
+                        <RiddleSelect v-for="riddle in riddles" :riddle="riddle" :currentRiddle="currentRiddle" />
                     </div>
                 </el-scrollbar>
                 <div class="main">

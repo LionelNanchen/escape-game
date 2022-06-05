@@ -65,6 +65,9 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.common-layout {
+    margin-bottom: 50px;
+}
 .main {
     margin: 12px;
 }

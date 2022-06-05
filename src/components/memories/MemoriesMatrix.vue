@@ -78,7 +78,7 @@ export default defineComponent({
     <el-card class="double-memories-card">
         <template #header>
             <div class="card-header">
-                <span class="card-header-title double-memories-message">{{ message }}</span>
+                <span class="double-memories-message">{{ message }}</span>
                 <ResetButton :onReset="onReset" />
             </div>
         </template>

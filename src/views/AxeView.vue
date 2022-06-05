@@ -1,10 +1,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Container from "../components/common/Container.vue";
-import TreeTrunk from "../assets/tree_trunk.jpeg";
-import TreeTrunkCut from "../assets/tree_trunk_cut.jpeg";
-import Axe1 from "../assets/axe_1.png";
-import Axe2 from "../assets/axe_2.png";
+import TreeTrunk from "../assets/axe/tree_trunk.jpeg";
+import TreeTrunkCut from "../assets/axe/tree_trunk_cut.jpeg";
+import Axe1 from "../assets/axe/axe_1.png";
+import Axe2 from "../assets/axe/axe_2.png";
 
 interface Data {
     logs: number,

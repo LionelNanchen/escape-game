@@ -35,6 +35,11 @@ export default defineComponent({
             (this.$refs.scrollbarRef as InstanceType<typeof ElScrollbar>).setScrollLeft(offset);
         }
     },
+    methods: {
+        onChangeResponse(response: string) {
+            if (this.currentRiddle) localStorage.setItem(this.currentRiddle?.id, response);
+        }
+    }
 })
 </script>
 
@@ -55,7 +60,7 @@ export default defineComponent({
                     <span class="title">{{ currentRiddle?.title }}</span>
                     <div class="input-response">
                         <el-input v-if="currentRiddle" maxlength="1" show-word-limit type="text" placeholder="Réponse"
-                            :value="currentRiddle?.response" v-model="currentRiddle.response" />
+                            :value="currentRiddle?.response" v-model="currentRiddle.response" @change="onChangeResponse" />
                     </div>
                 </div>
                 <slot />

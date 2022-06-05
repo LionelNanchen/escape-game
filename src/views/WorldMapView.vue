@@ -10,14 +10,14 @@ import Athens from "../assets/worldmap/athens.jpg";
 import Rabat from "../assets/worldmap/rabat.jpg";
 
 interface Location {
-    index: number;
-    image: string;
+    index: number,
+    image: string,
 }
 
 interface Data {
-    europe: string;
-    locations: Location[];
-    currentIndex: number;
+    europe: string,
+    locations: Location[],
+    currentIndex: number,
 }
 
 export default defineComponent({
@@ -56,11 +56,10 @@ export default defineComponent({
         return data;
     },
     computed: {
-        locationsImages() {
-            console.log("locations - ", this.locations.map((l: Location) => l.image));
+        locationsImages(): string[] {
             return this.locations.map((l: Location) => l.image);
         },
-        europeImages() {
+        europeImages(): string[] {
             return [this.europe];
         },
     },
@@ -84,7 +83,7 @@ export default defineComponent({
             <template #header>
                 <span class="card-header-title">Voyage n°{{ currentIndex }}</span>
             </template>
-            <el-carousel :interval="5000" arrow="always" :autoplay="false" indicator-position="none"
+            <el-carousel arrow="always" :autoplay="false" indicator-position="none"
                 @change="onChangeIndex">
                 <el-carousel-item v-for="location in locations" :key="location.index">
                     <el-image class="carousel-image" :src="location.image" :preview-src-list="locationsImages"

@@ -8,8 +8,8 @@ export const useRiddlesStore = defineStore('riddle', {
     };
   },
   actions: {
-    updateResponse(riddle: Riddle, response: string) {
-        this.riddles.find((r: Riddle) => r.id === riddle.id)!.response = response;
+    updateResponse(riddleId: RiddleId, response: string) {
+        this.riddles.find((r: Riddle) => r.id === riddleId)!.response = response;
     }
   },
 })

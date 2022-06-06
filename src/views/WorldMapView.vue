@@ -4,7 +4,7 @@ import Container from "../components/common/Container.vue";
 import Europe from "../assets/worldmap/europe_map.jpg";
 import Berlin from "../assets/worldmap/berlin.jpg";
 import Paris from "../assets/worldmap/paris.jpg";
-import Barcelona from "../assets/worldmap/barcelona.jpg";
+import Madrid from "../assets/worldmap/madrid.jpg";
 import Roma from "../assets/worldmap/roma.jpg";
 import Athens from "../assets/worldmap/athens.jpg";
 import Rabat from "../assets/worldmap/rabat.jpg";
@@ -37,7 +37,7 @@ export default defineComponent({
                 },
                 {
                     index: 3,
-                    image: Barcelona,
+                    image: Madrid,
                 },
                 {
                     index: 4,

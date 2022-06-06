@@ -3,7 +3,7 @@ interface Riddle {
     index: number,
     title: string,
     response: string,
-    time: string,
+    availableTime: string,
 }
 
 type Matrix = (string | undefined)[][];

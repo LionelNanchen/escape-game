@@ -5,8 +5,10 @@ import { defineComponent } from "vue";
 import moment from "moment";
 import Header from "./Header.vue";
 import RiddleSelect from "./RiddleSelect.vue";
+import TimeAPI from "../../network/time";
 
 interface Data {
+    loading: boolean,
     riddles: Riddle[] | undefined,
     currentRiddle: Riddle | undefined,
     accessible: boolean,
@@ -18,6 +20,7 @@ export default defineComponent({
     components: { Header, RiddleSelect },
     data() {
         const data: Data = {
+            loading: true,
             riddles: [],
             currentRiddle: undefined,
             accessible: false,
@@ -35,8 +38,10 @@ export default defineComponent({
         this.currentRiddle = this.riddles?.find((r: Riddle) => r.id === path);
 
         // Check riddle available time
-        this.checkAccessibility();
-        if (!this.accessible) setInterval(this.checkAccessibility, 10000);
+        this.checkAccessibility().then(() => {
+            this.loading = false;
+            if (!this.accessible) this.interval = setInterval(this.checkAccessibility, 10000);
+        });
     },
     mounted() {
         // Scroll to riddle select
@@ -47,7 +52,7 @@ export default defineComponent({
             (this.$refs.scrollbarRef as InstanceType<typeof ElScrollbar>).setScrollLeft(offset);
         }
     },
-    deactivated() {
+    beforeUnmount() {
         this.clearInterval();
     },
     methods: {
@@ -57,10 +62,11 @@ export default defineComponent({
                 this.interval = undefined;
             }
         },
-        checkAccessibility() {
+        async checkAccessibility() {
             if (this.currentRiddle) {
+                const now = await TimeAPI.now();
                 const availableTime = moment(this.currentRiddle.availableTime, "HH:mm");
-                this.countdown = availableTime.diff(moment(), "seconds");
+                this.countdown = availableTime.diff(now, "seconds");
                 if (this.countdown <= 0) {
                     this.accessible = true;
                     this.clearInterval();
@@ -73,7 +79,6 @@ export default defineComponent({
     },
     computed: {
         inaccessibleMessage(): string {
-            console.log("refresh");
             const minutes = Math.ceil(this.countdown / 60)
             return `Revenez dans ${minutes} minute${minutes > 1 ? 's' : ''}`;
         }
@@ -93,22 +98,24 @@ export default defineComponent({
                         <RiddleSelect v-for="riddle in riddles" :riddle="riddle" :currentRiddle="currentRiddle" />
                     </div>
                 </el-scrollbar>
-                <div v-if="accessible">
-                    <div class="main">
-                        <span class="riddle-index">Énigme {{ currentRiddle?.index }} - </span>
-                        <span class="title">{{ currentRiddle?.title }}</span>
-                        <div class="input-response">
-                            <el-input v-if="currentRiddle" maxlength="1" show-word-limit type="text"
-                                placeholder="Réponse" :value="currentRiddle?.response" v-model="currentRiddle.response"
-                                @change="onChangeResponse" />
+                <el-main v-loading="loading" element-loading-background="white">
+                    <div v-if="accessible">
+                        <div class="main">
+                            <span class="riddle-index">Énigme {{ currentRiddle?.index }} - </span>
+                            <span class="title">{{ currentRiddle?.title }}</span>
+                            <div class="input-response">
+                                <el-input v-if="currentRiddle" maxlength="1" show-word-limit type="text"
+                                    placeholder="Réponse" :value="currentRiddle?.response"
+                                    v-model="currentRiddle.response" @change="onChangeResponse" />
+                            </div>
                         </div>
+                        <slot />
                     </div>
-                    <slot />
-                </div>
-                <div v-else>
-                    <el-result icon="warning" title="Cet énigme n'est pas encore accessible"
-                        :sub-title="inaccessibleMessage" />
-                </div>
+                    <div v-else-if="!loading">
+                        <el-result icon="warning" title="Cet énigme n'est pas encore accessible"
+                            :sub-title="inaccessibleMessage" />
+                    </div>
+                </el-main>
             </el-main>
         </el-container>
     </div>

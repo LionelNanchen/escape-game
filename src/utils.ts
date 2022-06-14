@@ -1,6 +1,7 @@
 export enum RiddleId {
     Hieroglyphs = "hieroglyphs",
     DoubleMemories = "doubleMemories",
+    TimeTravel = "timeTravel",
     WorldMap = "worldMap",
     Axe = "axe",
     Souvenir = "souvenir",
@@ -22,9 +23,9 @@ export const riddles: Riddle[] = [
         availableTime: "17:00",
     },
     {
-        id: "",
+        id: RiddleId.TimeTravel,
         index: 3,
-        title: "???",
+        title: "Voyage dans le temps",
         response: "",
         availableTime: "17:30",
     },

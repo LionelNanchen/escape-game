@@ -18,14 +18,14 @@ export default defineComponent({
 </script>
 
 <template>
-    <div
-        class="riddle"
-        v-bind:class="(currentRiddle?.id === riddle.id) ? 'current-riddle' : ''"
-        v-bind:style="riddle.response.length > 0 && currentRiddle?.id !== riddle.id ? 'background-color: var(--el-color-primary-light-5)' : ''"
-        @click="onClick">
-        <span v-if="riddle.response.length > 0" style="font-weight: bold">{{ riddle.response.toUpperCase() }}</span>
-        <span v-else>{{ riddle.index }}</span>
-        <span class="riddle-title">{{ riddle.title }}</span>
+    <div>
+        <div class="riddle" v-bind:class="(currentRiddle?.id === riddle.id) ? 'current-riddle' : ''"
+            v-bind:style="riddle.response.length > 0 && currentRiddle?.id !== riddle.id ? 'background-color: var(--el-color-primary-light-5)' : ''"
+            @click="onClick">
+            <span v-if="riddle.response.length > 0" style="font-weight: bold">{{ riddle.response.toUpperCase() }}</span>
+            <span v-else>{{ riddle.index }}</span>
+            <span class="riddle-title">{{ riddle.title }}</span>
+        </div>
     </div>
 </template>
 
@@ -43,10 +43,16 @@ export default defineComponent({
     justify-content: center;
     cursor: pointer;
 }
+
+.riddle:last-child {
+    margin-right: 12px;
+}
+
 .riddle-title {
     font-size: 12px;
     text-align: center;
 }
+
 .current-riddle {
     color: white;
     background-color: var(--el-color-primary);

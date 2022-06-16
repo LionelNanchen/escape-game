@@ -3,9 +3,10 @@ import { defineComponent } from "vue";
 import { RouterView } from "vue-router";
 import { useRiddlesStore } from "./stores";
 import { RiddleId } from "./utils";
+import FallingHearts from "./components/common/FallingHearts.vue";
 
 export default defineComponent({
-  components: { RouterView },
+  components: { RouterView, FallingHearts },
   created() {
     // Update stored riddles responses from local storage
     const store = useRiddlesStore();
@@ -15,5 +16,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <RouterView />
+  <FallingHearts>
+    <RouterView />
+  </FallingHearts>
 </template>

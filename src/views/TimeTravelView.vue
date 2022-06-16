@@ -54,7 +54,6 @@ export default defineComponent({
     },
     methods: {
         clearInterval() {
-            console.log(this.interval);
             if (this.interval) {
                 clearInterval(this.interval)
                 this.interval = undefined;

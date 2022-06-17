@@ -1,8 +1,10 @@
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import Container from "../components/common/Container.vue";
-import TreeTrunk from "../assets/axe/tree_trunk.jpeg";
-import TreeTrunkCut from "../assets/axe/tree_trunk_cut.jpeg";
+import Tree from "../assets/axe/tree.jpg";
+import TreeCracked from "../assets/axe/tree_cracked.png";
+import Down from "../assets/axe/down.jpg";
+import Fireplace from "../assets/axe/fireplace.jpg";
 import Axe1 from "../assets/axe/axe_1.png";
 import Axe2 from "../assets/axe/axe_2.png";
 
@@ -46,11 +48,14 @@ export default defineComponent({
         }
     },
     computed: {
-        treeTrunk(): string {
-            return this.logs < Step.First ? TreeTrunk : TreeTrunkCut
+        tree(): string {
+            if (this.logs < Step.First) return Tree;
+            if (this.logs < Step.Second) return TreeCracked;
+            else if (this.logs < Step.Final) return Down;
+            else return Fireplace;
         },
         axe(): string {
-            return this.logs < Step.Second ? Axe1 : Axe2;
+            return this.logs < Step.First ? Axe1 : Axe2;
         },
     },
 });
@@ -63,21 +68,21 @@ export default defineComponent({
                 <span style="font-weight: bold;">🪵 x {{ logs }}</span>
             </template>
             <div class="axe-card-content">
-                <img style="width: 100%" :src="treeTrunk" fit="fill" />
-                <el-button class="axe-button" round text :disabled="isCutting" @click="onCut">
+                <img style="width: 100%" :src="tree" fit="fill" />
+                <el-button v-if="logs < Step.Final" class="axe-button" round text :disabled="isCutting" @click="onCut">
                     <img :style="{ animationDuration: `${time() / 1000}s` }"
                         v-bind:class="isCutting ? 'axe-cut-animation' : ''" class="axe-image" :src="axe" fit="fill" />
                 </el-button>
             </div>
             <div style="margin-top: 12px">
-                <el-alert v-if="logs >= Step.First && logs < Step.Second" title="Crac ... boom" type="warning"
+                <el-alert v-if="logs >= Step.First && logs < Step.Second" title="Crac ... Bon, une plus grosse hache hache 🪓" type="info"
                     :closable="false" effect="dark" show-icon />
-                <el-alert v-if="logs >= Step.Second && logs < Step.Third" title="Changement d'hache" type="warning"
+                <el-alert v-if="logs >= Step.Second && logs < Step.Third" title="Boom ... Guillaume à terre! 😵" type="warning"
                     :closable="false" effect="dark" show-icon />
-                <el-alert v-if="logs >= Step.Third && logs < Step.Final" title="Pas très utile ..." type="error"
+                <el-alert v-if="logs >= Step.Third && logs < Step.Final" title="Mais laisse Guillaume tranquille!" description="La réponse est devant tes yeux! 👀" type="error"
                     :closable="false" effect="dark" show-icon />
                 <el-alert v-if="logs >= Step.Final"
-                    title="Mais laisse cet arbre tranquille! La réponse est devant tes yeux!" type="error"
+                    title="Avec tous ce bois on peut se faire un petit feu! feu! 🔥" type="info"
                     :closable="false" effect="dark" show-icon />
             </div>
         </el-card>
@@ -103,15 +108,19 @@ img {
 }
 
 .axe-button {
+    z-index: 1;
     height: 100%;
-    padding: 0px;
+    padding: 0px !important;
+    display: flex;
+    align-items: end;
     position: absolute;
     background-color: transparent !important;
-    right: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .axe-image {
-    height: 180px
+    height: 180px;
 }
 
 .axe-cut-animation {
@@ -120,7 +129,7 @@ img {
 
 @keyframes cut {
     100% {
-        transform: rotate(-90deg)
+        transform: rotate(90deg)
     }
 }
 </style>
